@@ -1,0 +1,101 @@
+# File tools script - Day 6
+import os
+import shutil
+
+path = input ("what file to you want to check if it's on your device? ")
+
+def check_path(path):
+    if os.path.exists(path):
+        if os.path.isfile(path):
+            print(f"📄 {path} is a file.")
+        else:
+            print(f"📁 {path} is a folder.")
+    else:
+        print(f"❌ {path} does not exist.")
+check_path(path)
+
+print (" ")
+path = input ("file you want to read? ")
+def read_file(path):
+    try:
+        with open(path) as file:
+            print(file.read())
+    except FileNotFoundError:
+        print(f"❌ File {path} not found.")
+read_file(path)
+	
+	
+path = "path"
+text = input ("write over file you choose? ")	
+def write_file(path, text):
+    try:
+        with open(path, "w") as file:
+            file.write(text)
+        print(f"✅ Written to {path}")
+    except Exception as e:
+        print(f"❌ Error writing to {path}: {e}")
+write_file(path, text)
+print (" ")
+
+
+print ("copying file 🛑📁")
+src = input ("file you wanna copy ?")
+dst = input ("name? ")
+def copy_file(src, dst):
+    try:
+        shutil.copyfile(src, dst)
+        print(f"✅ Copied {src} to {dst}")
+    except FileNotFoundError:
+        print(f"❌ Source file {src} not found.")
+    except Exception as e:
+        print(f"❌ Error copying file: {e}")
+copy_file(src, dst)
+
+
+print (" ")
+print ("moving file 🛑📁")
+
+src = input ("where is your files location? ")
+dst = input ("where would you like your file to go? ")
+def move_file(src, dst):
+    try:
+        if os.path.exists(dst):
+            print(f"⚠️ Destination {dst} already exists.")
+        else:
+            os.replace(src, dst)
+            print(f"✅ Moved {src} to {dst}")
+    except FileNotFoundError:
+        print(f"❌ Source file {src} not found.")
+    except Exception as e:
+        print(f"❌ Error moving file: {e}")
+move_file(src, dst)
+	
+
+print (" ")
+print ("time to RIP ☠️ some files/delete")
+path = input ("file you want to delete? ")
+def delete_file(path):
+    try:
+        os.remove(path)
+        print(f"🗑️ Deleted file {path}")
+    except FileNotFoundError:
+        print(f"❌ File {path} not found.")
+    except Exception as e:
+        print(f"❌ Error deleting file: {e}")
+delete_file(path)
+
+print (" ")
+print ("🛑Unwanted folders 😭 I'm I ugly why RIP me")
+path = input ("folder 📂 you wish to delete? ")
+def delete_folder(path):
+    try:
+        os.rmdir(path)
+        print(f"🗑️ Deleted empty folder {path}")
+    except FileNotFoundError:
+        print(f"❌ Folder {path} not found.")
+    except OSError:
+        print(f"⚠️ Folder {path} not empty or can’t delete.")
+    except Exception as e:
+        print(f"❌ Error deleting folder: {e}")
+delete_folder(path)
+print ("leave me alone byeeee 👋")
